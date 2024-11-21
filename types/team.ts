@@ -1,7 +1,8 @@
-import { StaticImageData } from "next/image";
-
 export interface typeTeam {
-	image: StaticImageData | null;
+	image: string | null;
 	name: string;
 	position: string;
+	qualification: string | null;
+	bio: string;
+	groups?: string[];
 }
