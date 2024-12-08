@@ -1,19 +1,5 @@
-.card {
-	transition: 0.25s all ease;
-	padding: calc(var(--mantine-spacing-md) * 3) 0;
+.imageContainer {
 	box-shadow: var(--mantine-shadow-xs);
-	position: relative;
-	bottom: 0;
-
-	@include larger-than($mantine-breakpoint-sm) {
-		padding: var(--mantine-spacing-md) 0;
-	}
-	@include larger-than($mantine-breakpoint-md) {
-		padding: calc(var(--mantine-spacing-md) * 2) 0;
-	}
-
-	@include hover {
-		box-shadow: var(--mantine-shadow-sm);
-		bottom: calc(var(--mantine-spacing-xs) / 4);
-	}
+	border-radius: var(--mantine-radius-sm);
+	overflow: hidden;
 }

@@ -4,13 +4,15 @@ import { Metadata } from "next";
 
 import LayoutPage from "@/layouts/Page";
 import LayoutSection from "@/layouts/Section";
-import { AspectRatio, Grid, GridCol, List, ListItem, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import { AspectRatio, Divider, Grid, GridCol, List, ListItem, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 import stats from "@/data/stats";
 import CardStat from "@/components/card/Stat";
 import CardHub from "@/components/card/Hub";
 import videos from "@/assets/videos";
 import images from "@/assets/images";
+import team from "@/data/team";
+import CardTeamMain from "@/components/card/team/Main";
 
 export const metadata: Metadata = { title: "About" };
 
@@ -118,7 +120,7 @@ export default async function About() {
 				</Grid>
 			</LayoutSection>
 
-			<LayoutSection padded containerized={"responsive"}>
+			<LayoutSection padded bordered containerized={"responsive"}>
 				<Stack gap={"xl"}>
 					<Stack gap={"xs"} align="center">
 						<Title order={2} fw={"bold"} ta={"center"} fz={{ md: 24 }} w={{ md: "80%" }}>
@@ -135,6 +137,82 @@ export default async function About() {
 							</GridCol>
 						))}
 					</Grid>
+				</Stack>
+			</LayoutSection>
+
+			<LayoutSection
+				padded
+				containerized={"responsive"}
+				bg={"light-dark(var(--mantine-color-gray-1),var(--mantine-color-gray-1))"}
+			>
+				<Stack gap={64}>
+					<Stack gap={"xs"} align="center">
+						<Title order={2} fw={"bold"} ta={"center"} fz={{ md: 24 }} w={{ md: "80%" }}>
+							Our Team
+						</Title>
+
+						<Text ta={"center"}>Meet the passionate minds driving our vision forward.</Text>
+					</Stack>
+
+					<Stack gap={"xl"} align="center">
+						<Title order={3} fw={"bold"} ta={"center"} fz={{ md: 20 }} w={{ md: "80%" }}>
+							Board & Management
+						</Title>
+
+						<Grid>
+							<GridCol span={12}>
+								<Grid justify="center">
+									{team
+										.filter(member => member.groups?.includes("management"))
+										.map(
+											member =>
+												team
+													.filter(member => member.groups?.includes("management"))
+													.indexOf(member) < 2 && (
+													<GridCol key={member.name} span={{ xs: 6, sm: 4, md: 3 }}>
+														<CardTeamMain data={member} />
+													</GridCol>
+												)
+										)}
+								</Grid>
+							</GridCol>
+
+							<GridCol span={12}>
+								<Grid justify="center">
+									{team
+										.filter(member => member.groups?.includes("management"))
+										.map(
+											member =>
+												team
+													.filter(member => member.groups?.includes("management"))
+													.indexOf(member) > 1 && (
+													<GridCol key={member.name} span={{ xs: 6, sm: 4, md: 3 }}>
+														<CardTeamMain data={member} />
+													</GridCol>
+												)
+										)}
+								</Grid>
+							</GridCol>
+
+							<GridCol span={12}>
+								<LayoutSection containerized={"sm"}>
+									<Divider my={"md"} color="pri" variant="dashed" />
+								</LayoutSection>
+							</GridCol>
+
+							<GridCol span={12}>
+								<Grid justify="center">
+									{team
+										.filter(member => !member.groups)
+										.map(member => (
+											<GridCol key={member.name} span={{ xs: 6, sm: 4, md: 3 }}>
+												<CardTeamMain data={member} />
+											</GridCol>
+										))}
+								</Grid>
+							</GridCol>
+						</Grid>
+					</Stack>
 				</Stack>
 			</LayoutSection>
 		</LayoutPage>
